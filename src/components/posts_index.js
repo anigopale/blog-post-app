@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions';
+import _ from 'lodash';
 
 class PostsIndex extends Component {
   componentDidMount() {
@@ -8,17 +9,33 @@ class PostsIndex extends Component {
   }//as soon as component renders, this is called
   // better to use it with API requests
 
-  render () {
+  renderPosts() {
+    return _.map(this.props.posts, post => {
+      return (
+        <li className="list-group-item">
+          {post.title}
+        </li>
+      )//for every this.props.posts, arrow function will be passed in a function
+      //where argument (post) is used in function
+    });
+  }
+
+  render() {
     return (
       <div>
-        Posts Index
+        <h3>Posts</h3>
+        <ul className="list-group">
+          {this.renderPosts()}
+        </ul>
       </div>
     );
   }
 }
 
-
-
-export default connect(null, { fetchPosts })(PostsIndex);
+function mapStateToProps(state) {
+  return { posts: state.posts };
+}// redux, hooked up state to props for this container
+//
+export default connect(mapStateToProps, { fetchPosts })(PostsIndex);
 //created a props.fetchPosts = fetchPosts action
 // connect function
