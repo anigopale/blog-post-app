@@ -15,8 +15,7 @@ class PostsIndex extends Component {
     return _.map(this.props.posts, post => {
       return (
         <li key={post.id} className="list-group-item">
-          <h4>{post.title}</h4>
-          {post.content}
+          {post.title}
         </li>
       )//for every this.props.posts, arrow function will be passed in a function
       //where argument (post) is used in function
