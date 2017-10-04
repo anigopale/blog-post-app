@@ -19,9 +19,9 @@ class PostsNew extends Component {
         <Field
           name="title"
           component={this.renderTitleField}
-        />// distinct input on screen
+        />
       </form>
-    );
+    );// distinct input on screen
   }
 }
 
