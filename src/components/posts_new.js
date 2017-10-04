@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
 
 class PostsNew extends Component {
   renderField(field) {
+    const { meta: { touched, error } } = field;
+    //for destricturing
+
+    const className = `form-group ${touched && error ? 'has-danger' : ''}`
+
     return (
-      <div className="form-group">
+      <div className={className}>
         <label>{field.label}</label>
         <input
           className="form-control"
           type="text"
           {...field.input}
         />
-      {field.meta.touched ? field.meta.error: ""}
+      <div className="text-help">
+          {touched ? error: ""}
+        </div>
       </div>
     );
   }// field has all event handlers
@@ -41,6 +49,7 @@ class PostsNew extends Component {
           component={this.renderField}
         />
         <button type="submit" className="btn btn-primary">Submit</button>
+        <Link to="/" className="btn btn-danger">Cancel</Link>
       </form>
     );// distinct input on screen
   }
